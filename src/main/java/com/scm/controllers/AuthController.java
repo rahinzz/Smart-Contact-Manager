@@ -29,7 +29,6 @@ public class AuthController {
         User user = userRepo.findByEmailToken(token).orElse(null);
 
         if (user != null) {
-            // user fetch hua hai :: process karna hai
 
             if (user.getEmailToken().equals(token)) {
                 user.setEmailVerified(true);

@@ -42,7 +42,6 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         // set the user role
-
         user.setRoleList(List.of(AppConstants.ROLE_USER));
 
         logger.info(user.getProvider().toString());
@@ -65,7 +64,7 @@ public class UserServiceImpl implements UserService {
 
         User user2 = userRepo.findById(user.getUserId())
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-        // update karenge user2 from user
+        
         user2.setName(user.getName());
         user2.setEmail(user.getEmail());
         user2.setPassword(user.getPassword());

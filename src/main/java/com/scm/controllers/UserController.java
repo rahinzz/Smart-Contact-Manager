@@ -19,28 +19,16 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    // user dashbaord page
-
     @RequestMapping(value = "/dashboard")
     public String userDashboard() {
         System.out.println("User dashboard");
         return "user/dashboard";
     }
 
-    // user profile page
-
     @RequestMapping(value = "/profile")
     public String userProfile(Model model, Authentication authentication) {
 
         return "user/profile";
     }
-
-    // user add contacts page
-
-    // user view contacts
-
-    // user edit contact
-
-    // user delete contact
 
 }

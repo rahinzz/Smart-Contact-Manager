@@ -46,7 +46,6 @@ public class ContactController {
     private UserService userService;
 
     @RequestMapping("/add")
-    // add contact page: handler
     public String addContactView(Model model) {
         ContactForm contactForm = new ContactForm();
 
@@ -58,10 +57,6 @@ public class ContactController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String saveContact(@Valid @ModelAttribute ContactForm contactForm, BindingResult result,
             Authentication authentication, HttpSession session) {
-
-        // process the form data
-
-        // 1 validate form
 
         if (result.hasErrors()) {
 
@@ -75,14 +70,9 @@ public class ContactController {
         }
 
         String username = Helper.getEmailOfLoggedInUser(authentication);
-        // form ---> contact
 
         User user = userService.getUserByEmail(username);
-        // 2 process the contact picture
 
-        // image process
-
-        // uplod karne ka code
         Contact contact = new Contact();
         contact.setName(contactForm.getName());
         contact.setFavorite(contactForm.isFavorite());
@@ -104,10 +94,6 @@ public class ContactController {
         contactService.save(contact);
         System.out.println(contactForm);
 
-        // 3 set the contact picture url
-
-        // 4 `set message to be displayed on the view
-
         session.setAttribute("message",
                 Message.builder()
                         .content("You have successfully added a new contact")
@@ -118,8 +104,6 @@ public class ContactController {
 
     }
 
-    // view contacts
-
     @RequestMapping
     public String viewContacts(
             @RequestParam(value = "page", defaultValue = "0") int page,
@@ -128,7 +112,6 @@ public class ContactController {
             @RequestParam(value = "direction", defaultValue = "asc") String direction, Model model,
             Authentication authentication) {
 
-        // load all the user contacts
         String username = Helper.getEmailOfLoggedInUser(authentication);
 
         User user = userService.getUserByEmail(username);
@@ -142,8 +125,6 @@ public class ContactController {
 
         return "user/contacts";
     }
-
-    // search handler
 
     @RequestMapping("/search")
     public String searchHandler(
@@ -183,7 +164,6 @@ public class ContactController {
         return "user/search";
     }
 
-    // detete contact
     @RequestMapping("/delete/{contactId}")
     public String deleteContact(
             @PathVariable("contactId") String contactId,
@@ -202,7 +182,6 @@ public class ContactController {
         return "redirect:/user/contacts";
     }
 
-    // update contact form view
     @GetMapping("/view/{contactId}")
     public String updateContactFormView(
             @PathVariable("contactId") String contactId,
@@ -247,8 +226,6 @@ public class ContactController {
         con.setFavorite(contactForm.isFavorite());
         con.setWebsiteLink(contactForm.getWebsiteLink());
         con.setLinkedInLink(contactForm.getLinkedInLink());
-
-        // process image:
 
         if (contactForm.getContactImage() != null && !contactForm.getContactImage().isEmpty()) {
             logger.info("file is not empty");

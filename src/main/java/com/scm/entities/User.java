@@ -48,7 +48,6 @@ public class User implements UserDetails {
     private String phoneNumber;
 
     @Getter(value = AccessLevel.NONE)
-    // information
     private boolean enabled = false;
 
     private boolean emailVerified = false;
@@ -59,7 +58,6 @@ public class User implements UserDetails {
     private Providers provider = Providers.SELF;
     private String providerUserId;
 
-    // add more fields if needed
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Contact> contacts = new ArrayList<>();
 
@@ -76,10 +74,7 @@ public class User implements UserDetails {
                 .collect(Collectors.toList());
         return roles;
     }
-
-    // for this project:
-    // email id hai wahi hamare username
-
+    
     @Override
     public String getUsername() {
         return this.email;

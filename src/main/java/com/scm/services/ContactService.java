@@ -19,11 +19,9 @@ public interface ContactService {
     List<Contact> getAll();
 
     // get contact by id
-
     Contact getById(String id);
 
     // delete contact
-
     void delete(String id);
 
     // search contact
